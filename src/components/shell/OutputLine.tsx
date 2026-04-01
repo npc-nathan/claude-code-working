@@ -1,4 +1,4 @@
-import { c as _c } from "react/compiler-runtime";
+import { c as _c } from 'react/compiler-runtime';
 import * as React from 'react';
 import { useMemo } from 'react';
 import { useTerminalSize } from '../../hooks/useTerminalSize.js';
@@ -41,26 +41,28 @@ export function tryJsonFormatContent(content: string): string {
 // Match http(s) URLs inside JSON string values. Conservative: no quotes,
 // no whitespace, no trailing comma/brace that'd be JSON structure.
 const URL_IN_JSON = /https?:\/\/[^\s"'<>\\]+/g;
+const UNDERLINE_ANSI_RE = new RegExp(
+  String.raw`\u001B\[([0-9]+;)*4(;[0-9]+)*m|\u001B\[4(;[0-9]+)*m|\u001B\[([0-9]+;)*4m`,
+  'g',
+);
 export function linkifyUrlsInText(content: string): string {
   return content.replace(URL_IN_JSON, url => createHyperlink(url));
 }
 export function OutputLine(t0) {
   const $ = _c(11);
-  const {
-    content,
-    verbose,
-    isError,
-    isWarning,
-    linkifyUrls
-  } = t0;
-  const {
-    columns
-  } = useTerminalSize();
+  const { content, verbose, isError, isWarning, linkifyUrls } = t0;
+  const { columns } = useTerminalSize();
   const expandShellOutput = useExpandShellOutput();
   const inVirtualList = React.useContext(InVirtualListContext);
   const shouldShowFull = verbose || expandShellOutput;
   let t1;
-  if ($[0] !== columns || $[1] !== content || $[2] !== inVirtualList || $[3] !== linkifyUrls || $[4] !== shouldShowFull) {
+  if (
+    $[0] !== columns ||
+    $[1] !== content ||
+    $[2] !== inVirtualList ||
+    $[3] !== linkifyUrls ||
+    $[4] !== shouldShowFull
+  ) {
     bb0: {
       let formatted = tryJsonFormatContent(content);
       if (linkifyUrls) {
@@ -82,7 +84,7 @@ export function OutputLine(t0) {
     t1 = $[5];
   }
   const formattedContent = t1;
-  const color = isError ? "error" : isWarning ? "warning" : undefined;
+  const color = isError ? 'error' : isWarning ? 'warning' : undefined;
   let t2;
   if ($[6] !== formattedContent) {
     t2 = <Ansi>{formattedContent}</Ansi>;
@@ -93,7 +95,11 @@ export function OutputLine(t0) {
   }
   let t3;
   if ($[8] !== color || $[9] !== t2) {
-    t3 = <MessageResponse><Text color={color}>{t2}</Text></MessageResponse>;
+    t3 = (
+      <MessageResponse>
+        <Text color={color}>{t2}</Text>
+      </MessageResponse>
+    );
     $[8] = color;
     $[9] = t2;
     $[10] = t3;
@@ -111,7 +117,5 @@ export function OutputLine(t0) {
  * all formatting. So we just strip the underline ANSI codes specifically.
  */
 export function stripUnderlineAnsi(content: string): string {
-  return content.replace(
-  // eslint-disable-next-line no-control-regex
-  /\u001b\[([0-9]+;)*4(;[0-9]+)*m|\u001b\[4(;[0-9]+)*m|\u001b\[([0-9]+;)*4m/g, '');
+  return content.replace(UNDERLINE_ANSI_RE, '');
 }
