@@ -1,7 +1,7 @@
 {
   "name": "claude-code-working",
   "version": "1.0.3",
-  "description": "Reverse-engineered Anthropic Claude Code CLI — interactive AI coding assistant in the terminal",
+  "description": "Working reverse-engineered Claude Code CLI rebuilt to reproduce the original terminal workflow",
   "type": "module",
   "author": "iliya <iliyazelenkog@gmail.com>",
   "repository": {

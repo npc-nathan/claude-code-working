@@ -1,6 +1,6 @@
 # claude-code-working
 
-An English-translated mirror of a reverse-engineered Claude Code CLI codebase. The goal of this repository is to preserve the project in a more accessible form for English-speaking readers while keeping the code, docs, and architecture notes usable.
+A working reverse-engineered Claude Code CLI codebase rebuilt from source analysis to reproduce the original terminal workflow, architecture, and engineering behavior.
 
 [Start with the architecture docs](./docs/introduction/what-is-claude-code.mdx)
 
@@ -10,7 +10,7 @@ Current focus:
 - [x] The monorepo and engineering scaffolding are in place.
   - [ ] Biome formatting is intentionally conservative to avoid massive diff churn.
   - [x] The build pipeline produces runnable Node and Bun output.
-- [x] The documentation set has been translated to English.
+- [x] The documentation set is available in English.
 - [ ] More tests can still be added to improve confidence and stability.
 
 ## Quick start
